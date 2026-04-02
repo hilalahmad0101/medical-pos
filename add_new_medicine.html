@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Precision Rx - Add New Medicine</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary-container": "#bc4800",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#ffede6",
+            "on-primary-fixed-variant": "#003ea8",
+            "secondary-fixed": "#6ffbbe",
+            "tertiary-fixed": "#ffdbcd",
+            "on-secondary-fixed-variant": "#005236",
+            "secondary": "#006c49",
+            "on-secondary-fixed": "#002113",
+            "on-tertiary-fixed-variant": "#7d2d00",
+            "tertiary-fixed-dim": "#ffb596",
+            "secondary-fixed-dim": "#4edea3",
+            "on-background": "#191c1e",
+            "tertiary": "#943700",
+            "outline-variant": "#c3c6d7",
+            "on-primary-container": "#eeefff",
+            "inverse-on-surface": "#eff1f3",
+            "surface-bright": "#f7f9fb",
+            "on-surface": "#191c1e",
+            "on-tertiary-fixed": "#360f00",
+            "error-container": "#ffdad6",
+            "on-error-container": "#93000a",
+            "surface-variant": "#e0e3e5",
+            "error": "#ba1a1a",
+            "primary-container": "#2563eb",
+            "primary": "#004ac6",
+            "background": "#f7f9fb",
+            "on-tertiary": "#ffffff",
+            "surface-tint": "#0053db",
+            "surface-container": "#eceef0",
+            "on-primary-fixed": "#00174b",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f2f4f6",
+            "primary-fixed-dim": "#b4c5ff",
+            "surface": "#f7f9fb",
+            "primary-fixed": "#dbe1ff",
+            "on-secondary-container": "#00714d",
+            "on-error": "#ffffff",
+            "inverse-primary": "#b4c5ff",
+            "outline": "#737686",
+            "inverse-surface": "#2d3133",
+            "surface-dim": "#d8dadc",
+            "surface-container-highest": "#e0e3e5",
+            "on-surface-variant": "#434655",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#6cf8bb",
+            "surface-container-high": "#e6e8ea"
+          },
+          fontFamily: {
+            "headline": ["Manrope"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    h1,
+    h2,
+    h3,
+    .font-headline {
+      font-family: 'Manrope', sans-serif;
+    }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="flex bg-background text-on-background antialiased h-screen overflow-hidden">
+<div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden transition-opacity backdrop-blur-sm"></div>
+<aside id="sidebar" class="fixed lg:sticky left-0 top-0 h-screen w-64 bg-slate-100 dark:bg-slate-900 border-none z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col">
+<div class="p-6 flex items-center justify-between">
+<div>
+<h1 class="text-xl font-black text-blue-700 dark:text-blue-500 tracking-tight font-headline">Precision Rx</h1>
+<p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold mt-1">Lead Pharmacist</p>
+</div>
+<button id="mobile-sidebar-close" class="lg:hidden p-2 text-slate-500 hover:text-blue-600 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<!-- Dashboard -->
+<a id="nav-dashboard" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="dashboard_overview.html">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+<span class="font-inter text-sm font-medium">Dashboard</span>
+</a>
+<!-- POS -->
+<a id="nav-pos" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="pos_billing_terminal.html">
+<span class="material-symbols-outlined mr-3" data-icon="point_of_sale">point_of_sale</span>
+<span class="font-inter text-sm font-medium">POS</span>
+</a>
+<!-- Inventory -->
+<a id="nav-inventory" class="flex items-center px-4 py-3 text-blue-700 dark:text-blue-400 font-bold border-r-4 border-blue-600 bg-blue-50/50 dark:bg-blue-900/20 translate-x-1 transition-transform rounded-l-xl" href="inventory_management.html">
+<span class="material-symbols-outlined mr-3" data-icon="inventory_2" style="font-variation-settings: \'FILL\' 1;">inventory_2</span>
+<span class="font-inter text-sm font-medium">Inventory</span>
+</a>
+<!-- Customers -->
+<a id="nav-customers" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="customer_list.html">
+<span class="material-symbols-outlined mr-3" data-icon="group">group</span>
+<span class="font-inter text-sm font-medium">Customers</span>
+</a>
+<!-- Reports -->
+<a id="nav-reports" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="refined_invoice_templates.html">
+<span class="material-symbols-outlined mr-3" data-icon="assessment">assessment</span>
+<span class="font-inter text-sm font-medium">Reports</span>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<div class="flex items-center p-3 rounded-xl bg-white/50 dark:bg-slate-800/50">
+<img class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5AId7SvtNsigOTVepQ0GLyv16GHLBa0N1BiVn6q8PK6ImiPcOYuK90ZYZc707Tl-J9st8uo1JuV_G8WShO7qzOTQZ2QVQfuufsSV1MoQS-h2PkcHcXZqXjXlOyQmZUaubuTr4JbAWovgNUgeYSMn073MJJ3KjMds5xSTwGepjblmIhgXuVSLKsPH2KouQcFSfmemy0I14Js8NXVNZkywKsTU1qsuoV_ugKysChJsECd5i7-cA3CyTrOApQt-1x6vNyjIx2vz684c"/>
+<div class="ml-3 overflow-hidden">
+<p class="text-xs font-bold text-slate-900 dark:text-white truncate">Pharmacist Profile</p>
+<p class="text-[10px] text-slate-500 truncate">Lead Administrator</p>
+</div>
+</div>
+</div>
+</aside>
+  <!-- Main Content Canvas -->
+<div class="flex-1 flex flex-col min-w-0">
+<header class="flex items-center justify-between px-6 w-full h-16 sticky top-0 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50">
+<div class="flex items-center gap-4 flex-1">
+<button id="mobile-menu-open" class="lg:hidden p-2 -ml-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative w-full max-w-xl group hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="Search medications, batch no, or category..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+</button>
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<div class="h-6 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2"></div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="shopping_cart">shopping_cart</span>
+Complete Sale
+</button>
+</div>
+</header>
+<main class="flex-1 min-w-0 pt-4 pb-20 lg:pb-8 min-h-screen overflow-y-auto">
+      <section class="p-6 md:p-10 lg:p-12">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex flex-col md:flex-row gap-12 items-start">
+            <!-- Left Column: The Form -->
+            <div class="flex-1 w-full space-y-8">
+              <div class="flex items-center gap-4 mb-2">
+                <a class="p-2 hover:bg-surface-container rounded-full text-outline transition-colors"
+                  href="inventory_management.html">
+                  <span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+                </a>
+                <div>
+                  <h1 class="text-3xl font-extrabold text-on-surface tracking-tight">Add New Medicine</h1>
+                  <p class="text-on-surface-variant font-medium">Add clinical and financial details to the inventory.</p>
+                </div>
+              </div>
+              <!-- Medicine Identity -->
+              <div class="bg-surface-container-lowest rounded-3xl p-8 shadow-sm space-y-8">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary" data-icon="medication">medication</span>
+                  <h3 class="text-lg font-bold text-on-surface">Medicine Identity</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="col-span-2">
+                    <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Medicine Name & Dosage</label>
+                    <input
+                      class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3.5 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all font-medium"
+                      placeholder="e.g. Amoxicillin 500mg" type="text" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Category</label>
+                    <select class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3.5 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all appearance-none">
+                        <option>Antibiotic</option>
+                        <option>Antipyretic</option>
+                        <option>Antidiabetic</option>
+                        <option>Antihypertensive</option>
+                        <option>Topical</option>
+                        <option>Supplements</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Dosage Form</label>
+                    <select class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3.5 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all appearance-none">
+                        <option>Tablet</option>
+                        <option>Capsule</option>
+                        <option>Syrup</option>
+                        <option>Injection</option>
+                        <option>Ointment</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Manufacturer</label>
+                    <input
+                      class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3.5 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all"
+                      placeholder="e.g. Pfizer, Novartis..." type="text" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Batch Number</label>
+                    <input
+                      class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3.5 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all font-mono"
+                      placeholder="BCH-000-00" type="text" />
+                  </div>
+                </div>
+              </div>
+              <!-- Financials & Stock -->
+              <div class="bg-surface-container-lowest rounded-3xl p-8 shadow-sm space-y-8">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary" data-icon="payments">payments</span>
+                  <h3 class="text-lg font-bold text-on-surface">Pricing & Inventory</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Purchase Price ($)</label>
+                    <input
+                      class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3.5 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all"
+                      placeholder="0.00" type="number" step="0.01" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Sale Price ($)</label>
+                    <input
+                      class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3.5 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all"
+                      placeholder="0.00" type="number" step="0.01" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Initial Quantity</label>
+                    <input
+                      class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3.5 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all"
+                      placeholder="0" type="number" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Expiry Date</label>
+                    <input
+                      class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3.5 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all"
+                      type="date" />
+                  </div>
+                </div>
+              </div>
+              <!-- Storage & Compliance -->
+              <div class="bg-surface-container-lowest rounded-3xl p-8 shadow-sm space-y-8">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary" data-icon="shelves">shelves</span>
+                  <h3 class="text-lg font-bold text-on-surface">Storage & Compliance</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Shelf Location</label>
+                        <input
+                          class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3.5 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all"
+                          placeholder="e.g. A-12, B-04" type="text" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Storage Conditions</label>
+                        <select class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3.5 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all appearance-none">
+                            <option>Room Temperature</option>
+                            <option>Refrigerated (2-8°C)</option>
+                            <option>Controlled Substance</option>
+                        </select>
+                    </div>
+                    <div class="col-span-2">
+                        <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Clinical Instructions</label>
+                        <textarea
+                          class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3.5 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all"
+                          placeholder="e.g. Take after meal, avoid sunlight..." rows="3"></textarea>
+                    </div>
+                </div>
+              </div>
+              <!-- Actions -->
+              <div class="flex flex-col sm:flex-row items-center justify-end gap-4 pt-6">
+                <button
+                  class="w-full sm:w-auto px-10 py-4 border-2 border-outline-variant text-outline font-bold rounded-2xl hover:bg-surface-container transition-colors">
+                  Cancel
+                </button>
+                <button
+                  class="w-full sm:w-auto px-12 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold rounded-2xl shadow-xl shadow-primary/30 hover:scale-[1.02] active:scale-95 transition-all">
+                  Save to Inventory
+                </button>
+              </div>
+            </div>
+            <!-- Right Column: Sidebar Tips -->
+            <div class="w-full md:w-80 space-y-6 lg:sticky lg:top-8">
+              <div class="glass-panel rounded-3xl p-8 border border-white/50 shadow-xl">
+                <div class="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6">
+                  <span class="material-symbols-outlined text-2xl">verified</span>
+                </div>
+                <h4 class="text-xl font-bold text-on-surface mb-3 tracking-tight">Inventory Standards</h4>
+                <p class="text-on-surface-variant text-sm leading-relaxed mb-6">
+                  Ensure the Batch Number and Expiry Date precisely match the physical packaging for regulatory audits.
+                </p>
+                <div class="space-y-4">
+                  <div class="flex gap-3 items-start">
+                    <span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                    <p class="text-xs font-medium text-on-surface-variant">Verify FDA/Local drug ID</p>
+                  </div>
+                  <div class="flex gap-3 items-start">
+                    <span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                    <p class="text-xs font-medium text-on-surface-variant">Check cold-chain requirements</p>
+                  </div>
+                  <div class="flex gap-3 items-start">
+                    <span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                    <p class="text-xs font-medium text-on-surface-variant">Define re-order threshold</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Medicine Preview / Visual -->
+              <div class="relative rounded-3xl overflow-hidden h-56 group shadow-lg">
+                <img alt="Medical Bottles"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=2664&auto=format&fit=crop" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6">
+                  <p class="text-white text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Quality Check</p>
+                  <p class="text-white font-semibold text-sm">Automated Interaction Alerts Enabled</p>
+                </div>
+              </div>
+              <!-- Quick Stats -->
+              <div class="bg-surface-container-low rounded-3xl p-6 border border-outline-variant/10">
+                <h5 class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-4">Current Category Status</h5>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-[11px] mb-1">
+                            <span class="text-on-surface-variant font-medium">Antibiotics Stock</span>
+                            <span class="text-primary font-bold">82%</span>
+                        </div>
+                        <div class="h-1.5 bg-white rounded-full overflow-hidden">
+                            <div class="h-full bg-primary rounded-full transition-all duration-1000" style="width: 82%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-[11px] mb-1">
+                            <span class="text-on-surface-variant font-medium">Expiry Risk</span>
+                            <span class="text-error font-bold">Low</span>
+                        </div>
+                        <div class="h-1.5 bg-white rounded-full overflow-hidden">
+                            <div class="h-full bg-secondary rounded-full transition-all duration-1000" style="width: 15%"></div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const openBtn = document.getElementById('mobile-menu-open');
+        const closeBtn = document.getElementById('mobile-sidebar-close');
+        const toggleSidebar = () => {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        };
+        if (openBtn) openBtn.addEventListener('click', toggleSidebar);
+        if (closeBtn) closeBtn.addEventListener('click', toggleSidebar);
+        if (overlay) overlay.addEventListener('click', toggleSidebar);
+    });
+</script>
+</body>
+</html>

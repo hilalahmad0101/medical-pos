@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vitalis POS - Customer Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary-container": "#bc4800",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#ffede6",
+            "on-primary-fixed-variant": "#003ea8",
+            "secondary-fixed": "#6ffbbe",
+            "tertiary-fixed": "#ffdbcd",
+            "on-secondary-fixed-variant": "#005236",
+            "secondary": "#006c49",
+            "on-secondary-fixed": "#002113",
+            "on-tertiary-fixed-variant": "#7d2d00",
+            "tertiary-fixed-dim": "#ffb596",
+            "secondary-fixed-dim": "#4edea3",
+            "on-background": "#191c1e",
+            "tertiary": "#943700",
+            "outline-variant": "#c3c6d7",
+            "on-primary-container": "#eeefff",
+            "inverse-on-surface": "#eff1f3",
+            "surface-bright": "#f7f9fb",
+            "on-surface": "#191c1e",
+            "on-tertiary-fixed": "#360f00",
+            "error-container": "#ffdad6",
+            "on-error-container": "#93000a",
+            "surface-variant": "#e0e3e5",
+            "error": "#ba1a1a",
+            "primary-container": "#2563eb",
+            "primary": "#004ac6",
+            "background": "#f7f9fb",
+            "on-tertiary": "#ffffff",
+            "surface-tint": "#0053db",
+            "surface-container": "#eceef0",
+            "on-primary-fixed": "#00174b",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f2f4f6",
+            "primary-fixed-dim": "#b4c5ff",
+            "surface": "#f7f9fb",
+            "primary-fixed": "#dbe1ff",
+            "on-secondary-container": "#00714d",
+            "on-error": "#ffffff",
+            "inverse-primary": "#b4c5ff",
+            "outline": "#737686",
+            "inverse-surface": "#2d3133",
+            "surface-dim": "#d8dadc",
+            "surface-container-highest": "#e0e3e5",
+            "on-surface-variant": "#434655",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#6cf8bb",
+            "surface-container-high": "#e6e8ea"
+          },
+          fontFamily: {
+            "headline": ["Manrope"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+    }
+  </style>
+</head>
+<body class="flex bg-background text-on-surface antialiased h-screen overflow-hidden">
+<div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden transition-opacity backdrop-blur-sm"></div>
+<aside id="sidebar" class="fixed lg:sticky left-0 top-0 h-screen w-64 bg-slate-100 dark:bg-slate-900 border-none z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col">
+<div class="p-6 flex items-center justify-between">
+<div>
+<h1 class="text-xl font-black text-blue-700 dark:text-blue-500 tracking-tight font-headline">Precision Rx</h1>
+<p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold mt-1">Lead Pharmacist</p>
+</div>
+<button id="mobile-sidebar-close" class="lg:hidden p-2 text-slate-500 hover:text-blue-600 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<!-- Dashboard -->
+<a id="nav-dashboard" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="dashboard_overview.html">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+<span class="font-inter text-sm font-medium">Dashboard</span>
+</a>
+<!-- POS -->
+<a id="nav-pos" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="pos_billing_terminal.html">
+<span class="material-symbols-outlined mr-3" data-icon="point_of_sale">point_of_sale</span>
+<span class="font-inter text-sm font-medium">POS</span>
+</a>
+<!-- Inventory -->
+<a id="nav-inventory" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="inventory_management.html">
+<span class="material-symbols-outlined mr-3" data-icon="inventory_2">inventory_2</span>
+<span class="font-inter text-sm font-medium">Inventory</span>
+</a>
+<!-- Customers -->
+<a id="nav-customers" class="flex items-center px-4 py-3 text-blue-700 dark:text-blue-400 font-bold border-r-4 border-blue-600 bg-blue-50/50 dark:bg-blue-900/20 translate-x-1 transition-transform rounded-l-xl" href="customer_list.html">
+<span class="material-symbols-outlined mr-3" data-icon="group" style="font-variation-settings: \'FILL\' 1;">group</span>
+<span class="font-inter text-sm font-medium">Customers</span>
+</a>
+<!-- Reports -->
+<a id="nav-reports" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="refined_invoice_templates.html">
+<span class="material-symbols-outlined mr-3" data-icon="assessment">assessment</span>
+<span class="font-inter text-sm font-medium">Reports</span>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<div class="flex items-center p-3 rounded-xl bg-white/50 dark:bg-slate-800/50">
+<img class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5AId7SvtNsigOTVepQ0GLyv16GHLBa0N1BiVn6q8PK6ImiPcOYuK90ZYZc707Tl-J9st8uo1JuV_G8WShO7qzOTQZ2QVQfuufsSV1MoQS-h2PkcHcXZqXjXlOyQmZUaubuTr4JbAWovgNUgeYSMn073MJJ3KjMds5xSTwGepjblmIhgXuVSLKsPH2KouQcFSfmemy0I14Js8NXVNZkywKsTU1qsuoV_ugKysChJsECd5i7-cA3CyTrOApQt-1x6vNyjIx2vz684c"/>
+<div class="ml-3 overflow-hidden">
+<p class="text-xs font-bold text-slate-900 dark:text-white truncate">Pharmacist Profile</p>
+<p class="text-[10px] text-slate-500 truncate">Lead Administrator</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- SideNavBar -->
+<div class="flex-1 flex flex-col min-w-0">
+<header class="flex items-center justify-between px-6 w-full h-16 sticky top-0 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50">
+<div class="flex items-center gap-4 flex-1">
+<button id="mobile-menu-open" class="lg:hidden p-2 -ml-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative w-full max-w-xl group hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="Search medications, batch no, or category..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+</button>
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<div class="h-6 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2"></div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="shopping_cart">shopping_cart</span>
+Complete Sale
+</button>
+</div>
+</header>
+<main class="flex-1 min-w-0 pt-4 pb-20 lg:pb-8 min-h-screen overflow-y-auto">
+<!-- Content Area -->
+<div class="flex-1 overflow-y-auto p-8">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Page Title & Header Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<h1 class="text-3xl font-extrabold tracking-tight text-slate-900 font-headline">Customer Management</h1>
+<a href="add_new_customer.html" class="flex items-center gap-2 px-6 py-3 rounded-2xl bg-primary text-on-primary hover:opacity-90 transition-all shadow-xl shadow-primary/20 text-sm font-bold">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">person_add</span>
+    Add New Customer
+</a>
+</div>
+<!-- Customer Table Section -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden border border-slate-100/50">
+<div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center">
+<div class="flex items-center gap-4">
+<h2 class="font-headline font-bold text-lg">Customer Directory</h2>
+<span class="bg-slate-100 text-slate-600 text-xs font-bold px-2 py-0.5 rounded">84 filtered results</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-slate-500 hover:bg-slate-50 p-2 rounded-lg transition-colors flex items-center gap-2 text-sm font-semibold">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                Filters
+              </button>
+<button class="text-slate-500 hover:bg-slate-50 p-2 rounded-lg transition-colors flex items-center gap-2 text-sm font-semibold">
+<span class="material-symbols-outlined text-lg">download</span>
+                Export CSV
+              </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-separate border-spacing-0">
+<thead>
+<tr class="bg-slate-50/50">
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-slate-100">Name</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-slate-100">Phone</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-slate-100">Email</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-slate-100">Total Orders</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-slate-100">Balance</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-slate-100">Last Visit</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest border-b border-slate-100 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Table Row: Highlighted due to high balance -->
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">JS</div>
+<div>
+<div class="font-bold text-slate-900">James Sullivan</div>
+<div class="text-xs text-slate-500 font-label">Chronic Patient</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-600">(555) 124-5678</td>
+<td class="px-6 py-4 text-sm text-slate-500">james.sullivan@email.com</td>
+<td class="px-6 py-4 text-sm font-bold text-slate-900">42</td>
+<td class="px-6 py-4">
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-error-container text-error text-xs font-bold">
+                      $850.25
+                    </div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500">2 hours ago</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center font-bold text-sm">EM</div>
+<div>
+<div class="font-bold text-slate-900">Elena Martinez</div>
+<div class="text-xs text-slate-500 font-label">New Member</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-600">(555) 987-3210</td>
+<td class="px-6 py-4 text-sm text-slate-500">e.martinez@cloud.net</td>
+<td class="px-6 py-4 text-sm font-bold text-slate-900">3</td>
+<td class="px-6 py-4 text-sm font-bold text-slate-900">$0.00</td>
+<td class="px-6 py-4 text-sm text-slate-500">Yesterday</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Table Row: Highlighted -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm">RW</div>
+<div>
+<div class="font-bold text-slate-900">Robert White</div>
+<div class="text-xs text-slate-500 font-label">Corporate Account</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-600">(555) 443-1122</td>
+<td class="px-6 py-4 text-sm text-slate-500">r.white@medcorp.com</td>
+<td class="px-6 py-4 text-sm font-bold text-slate-900">128</td>
+<td class="px-6 py-4">
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-error-container text-error text-xs font-bold">
+                      $1,240.00
+                    </div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500">3 days ago</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-bold text-sm">SC</div>
+<div>
+<div class="font-bold text-slate-900">Sarah Chen</div>
+<div class="text-xs text-slate-500 font-label">Regular Patient</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-600">(555) 231-0099</td>
+<td class="px-6 py-4 text-sm text-slate-500">sarah.chen@webmail.com</td>
+<td class="px-6 py-4 text-sm font-bold text-slate-900">18</td>
+<td class="px-6 py-4 text-sm font-bold text-slate-900">$12.50</td>
+<td class="px-6 py-4 text-sm text-slate-500">Oct 12, 2023</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-sm">DK</div>
+<div>
+<div class="font-bold text-slate-900">David Kim</div>
+<div class="text-xs text-slate-500 font-label">Local Resident</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-600">(555) 888-4444</td>
+<td class="px-6 py-4 text-sm text-slate-500">dkim99@gmail.com</td>
+<td class="px-6 py-4 text-sm font-bold text-slate-900">9</td>
+<td class="px-6 py-4 text-sm font-bold text-slate-900">$0.00</td>
+<td class="px-6 py-4 text-sm text-slate-500">Oct 10, 2023</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between">
+<div class="text-sm text-slate-500 font-medium">
+              Showing 1 to 5 of 2,840 customers
+            </div>
+<div class="flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-white border border-slate-200 text-slate-400 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white font-bold text-sm">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 font-bold text-sm">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 font-bold text-sm">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-white border border-slate-200 text-slate-400 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Follow-up Alert Removed for clean view -->
+</div>
+</div>
+</main>
+</div>
+<!-- Quick Search Removed for clean view -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const openBtn = document.getElementById('mobile-menu-open');
+        const closeBtn = document.getElementById('mobile-sidebar-close');
+        const toggleSidebar = () => {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        };
+        if (openBtn) openBtn.addEventListener('click', toggleSidebar);
+        if (closeBtn) closeBtn.addEventListener('click', toggleSidebar);
+        if (overlay) overlay.addEventListener('click', toggleSidebar);
+    });
+</script>
+</body></html>

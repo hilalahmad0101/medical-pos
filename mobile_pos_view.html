@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Precision Rx | Mobile POS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+   tailwind.config = {
+    darkMode: "class",
+    theme: {
+     extend: {
+      colors: {
+       "inverse-surface": "#2d3133",
+       "tertiary": "#943700",
+       "inverse-on-surface": "#eff1f3",
+       "background": "#f7f9fb",
+       "secondary-container": "#6cf8bb",
+       "outline": "#737686",
+       "on-primary": "#ffffff",
+       "on-primary-fixed": "#00174b",
+       "on-primary-fixed-variant": "#003ea8",
+       "on-background": "#191c1e",
+       "surface-bright": "#f7f9fb",
+       "secondary-fixed-dim": "#4edea3",
+       "on-primary-container": "#eeefff",
+       "surface-variant": "#e0e3e5",
+       "on-error-container": "#93000a",
+       "outline-variant": "#c3c6d7",
+       "on-tertiary-fixed": "#360f00",
+       "surface-container-lowest": "#ffffff",
+       "tertiary-fixed-dim": "#ffb596",
+       "on-tertiary": "#ffffff",
+       "secondary": "#006c49",
+       "primary-fixed": "#dbe1ff",
+       "on-error": "#ffffff",
+       "on-surface-variant": "#434655",
+       "surface-dim": "#d8dadc",
+       "on-tertiary-fixed-variant": "#7d2d00",
+       "inverse-primary": "#b4c5ff",
+       "error-container": "#ffdad6",
+       "surface-container-highest": "#e0e3e5",
+       "on-tertiary-container": "#ffede6",
+       "on-secondary-fixed-variant": "#005236",
+       "on-secondary": "#ffffff",
+       "error": "#ba1a1a",
+       "secondary-fixed": "#6ffbbe",
+       "tertiary-fixed": "#ffdbcd",
+       "primary-fixed-dim": "#b4c5ff",
+       "surface-container-low": "#f2f4f6",
+       "tertiary-container": "#bc4800",
+       "on-secondary-container": "#00714d",
+       "primary-container": "#2563eb",
+       "on-secondary-fixed": "#002113",
+       "surface-tint": "#0053db",
+       "surface-container-high": "#e6e8ea",
+       "surface": "#f7f9fb",
+       "on-surface": "#191c1e",
+       "surface-container": "#eceef0",
+       "primary": "#004ac6"
+      },
+      fontFamily: {
+       "headline": ["Manrope"],
+       "body": ["Inter"],
+       "label": ["Inter"]
+      },
+      borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+     },
+    },
+   }
+  </script>
+<style>
+    body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+    .font-manrope { font-family: 'Manrope', sans-serif; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-summary {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+  </style>
+<style>
+  body {
+   min-height: max(884px, 100dvh);
+  }
+ </style>
+ </head>
+<body class="flex bg-surface text-on-surface flex-col min-h-screen">
+<div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden transition-opacity backdrop-blur-sm"></div>
+<aside id="sidebar" class="fixed lg:sticky left-0 top-0 h-screen w-64 bg-slate-100 dark:bg-slate-900 border-none z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col">
+<div class="p-6 flex items-center justify-between">
+<div>
+<h1 class="text-xl font-black text-blue-700 dark:text-blue-500 tracking-tight font-headline">Precision Rx</h1>
+<p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold mt-1">Lead Pharmacist</p>
+</div>
+<button id="mobile-sidebar-close" class="lg:hidden p-2 text-slate-500 hover:text-blue-600 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<!-- Dashboard -->
+<a id="nav-dashboard" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="dashboard_overview.html">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+<span class="font-inter text-sm font-medium">Dashboard</span>
+</a>
+<!-- POS -->
+<a id="nav-pos" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="pos_billing_terminal.html">
+<span class="material-symbols-outlined mr-3" data-icon="point_of_sale">point_of_sale</span>
+<span class="font-inter text-sm font-medium">POS</span>
+</a>
+<!-- Inventory -->
+<a id="nav-inventory" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="inventory_management.html">
+<span class="material-symbols-outlined mr-3" data-icon="inventory_2">inventory_2</span>
+<span class="font-inter text-sm font-medium">Inventory</span>
+</a>
+<!-- Customers -->
+<a id="nav-customers" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="customer_list.html">
+<span class="material-symbols-outlined mr-3" data-icon="group">group</span>
+<span class="font-inter text-sm font-medium">Customers</span>
+</a>
+<!-- Reports -->
+<a id="nav-reports" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="refined_invoice_templates.html">
+<span class="material-symbols-outlined mr-3" data-icon="assessment">assessment</span>
+<span class="font-inter text-sm font-medium">Reports</span>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<div class="flex items-center p-3 rounded-xl bg-white/50 dark:bg-slate-800/50">
+<img class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5AId7SvtNsigOTVepQ0GLyv16GHLBa0N1BiVn6q8PK6ImiPcOYuK90ZYZc707Tl-J9st8uo1JuV_G8WShO7qzOTQZ2QVQfuufsSV1MoQS-h2PkcHcXZqXjXlOyQmZUaubuTr4JbAWovgNUgeYSMn073MJJ3KjMds5xSTwGepjblmIhgXuVSLKsPH2KouQcFSfmemy0I14Js8NXVNZkywKsTU1qsuoV_ugKysChJsECd5i7-cA3CyTrOApQt-1x6vNyjIx2vz684c"/>
+<div class="ml-3 overflow-hidden">
+<p class="text-xs font-bold text-slate-900 dark:text-white truncate">Pharmacist Profile</p>
+<p class="text-[10px] text-slate-500 truncate">Lead Administrator</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- SideNavBar -->
+<!-- Top Navigation Bar -->
+<div class="flex-1 flex flex-col min-w-0">
+<header class="flex items-center justify-between px-6 w-full h-16 sticky top-0 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50">
+<div class="flex items-center gap-4 flex-1">
+<button id="mobile-menu-open" class="lg:hidden p-2 -ml-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative w-full max-w-xl group hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="Search medications, batch no, or category..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+</button>
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<div class="h-6 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2"></div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="shopping_cart">shopping_cart</span>
+Complete Sale
+</button>
+</div>
+</header>
+<main class="flex-1 min-w-0 pt-4 pb-20 lg:pb-8 min-h-screen overflow-y-auto">
+<!-- Fast Billing Search Area -->
+<section class="space-y-3">
+<div class="flex gap-2">
+<div class="relative flex-1 group">
+<div class="absolute inset-y-0 left-4 flex items-center text-on-surface-variant pointer-events-none">
+<span class="material-symbols-outlined text-xl" data-icon="search">search</span>
+</div>
+<input class="w-full h-14 pl-12 pr-4 bg-surface-container-high border-none rounded-xl text-on-surface placeholder:text-on-surface-variant focus:ring-2 focus:ring-primary/20 transition-all font-medium" placeholder="Search medicine or scan barcode..." type="text"/>
+</div>
+<button class="w-14 h-14 flex items-center justify-center bg-primary text-on-primary rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="barcode_scanner">barcode_scanner</span>
+</button>
+</div>
+<!-- Quick Suggestions -->
+<div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+<button class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full text-xs font-semibold flex-shrink-0">Paracetamol</button>
+<button class="px-4 py-2 bg-surface-container-low text-on-surface-variant rounded-full text-xs font-semibold flex-shrink-0">Amoxicillin</button>
+<button class="px-4 py-2 bg-surface-container-low text-on-surface-variant rounded-full text-xs font-semibold flex-shrink-0">Ibuprofen</button>
+<button class="px-4 py-2 bg-surface-container-low text-on-surface-variant rounded-full text-xs font-semibold flex-shrink-0">Vitamin C</button>
+</div>
+</section>
+<!-- Cart / Basket View -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="font-manrope font-bold text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="shopping_basket">shopping_basket</span>
+          Active Basket (3)
+        </h2>
+<button class="text-xs font-bold text-error uppercase tracking-widest">Clear All</button>
+</div>
+<!-- Medicine List -->
+<div class="space-y-3">
+<!-- Medicine Item 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="pill">pill</span>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-sm font-bold text-on-surface truncate">Amoxicillin 500mg</h3>
+<p class="text-xs text-on-surface-variant">Strip of 10 • Exp: 12/25</p>
+</div>
+<div class="flex-col items-end gap-2">
+<span class="text-sm font-bold font-manrope text-on-surface">$12.50</span>
+<div class="flex items-center bg-surface-container rounded-lg px-2 py-1">
+<button class="w-6 h-6 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-sm" data-icon="remove">remove</span></button>
+<span class="mx-3 text-xs font-bold">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-sm" data-icon="add">add</span></button>
+</div>
+</div>
+</div>
+<!-- Medicine Item 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="vaccines">vaccines</span>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-sm font-bold text-on-surface truncate">Insulin Glargine 100u</h3>
+<p class="text-xs text-on-surface-variant">3ml Pen • Exp: 08/24</p>
+</div>
+<div class="flex-col items-end gap-2">
+<span class="text-sm font-bold font-manrope text-on-surface">$45.00</span>
+<div class="flex items-center bg-surface-container rounded-lg px-2 py-1">
+<button class="w-6 h-6 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-sm" data-icon="remove">remove</span></button>
+<span class="mx-3 text-xs font-bold">2</span>
+<button class="w-6 h-6 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-sm" data-icon="add">add</span></button>
+</div>
+</div>
+</div>
+<!-- Medicine Item 3 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="medication">medication</span>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-sm font-bold text-on-surface truncate">Paracetamol 650mg</h3>
+<p class="text-xs text-on-surface-variant">Tablet • Exp: 05/26</p>
+</div>
+<div class="flex-col items-end gap-2">
+<span class="text-sm font-bold font-manrope text-on-surface">$3.20</span>
+<div class="flex items-center bg-surface-container rounded-lg px-2 py-1">
+<button class="w-6 h-6 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-sm" data-icon="remove">remove</span></button>
+<span class="mx-3 text-xs font-bold">5</span>
+<button class="w-6 h-6 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-sm" data-icon="add">add</span></button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Customer Selection -->
+<section class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/15">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Customer</span>
+<button class="text-xs font-bold text-primary">+ New</button>
+</div>
+<div class="flex items-center gap-3">
+<img alt="Customer Avatar" class="w-8 h-8 rounded-full object-cover" data-alt="portrait of an elderly woman with gentle expression and kind eyes looking directly at camera in soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTOBe8JuP-iCygvRyEHgisxfDliL90jYGOHF4_Vklapc1_2nAgLFvXfnrtNQZh9puCCABZ_1u2xjzUolv0HUmXBv1AI1kTk_xhXlqB6AsyyW7xPLrek-MkaUMpxEISjMvheojM9TbHP5vw8_tJBZ5mFYET4ewTfre7BPNpvxIrXQk2N5m13npgPpIUYZfEdw0VVCytxqOHhv46MTMQt4RmsjHGJ4auh5w59zu5kYakhMvpgclOEmSuYTl4eW5RmuUp150RLoUOQ2o"/>
+<div class="flex-1">
+<p class="text-sm font-semibold">Martha Stewart</p>
+<p class="text-[10px] text-on-surface-variant">Loyalty: 1,240 pts</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</div>
+</section>
+</main>
+</div>
+<!-- Quick Sale Summary Floating Area -->
+<div class="fixed bottom-20 left-0 w-full px-4 z-40">
+<div class="glass-summary max-w-md mx-auto p-4 rounded-2xl shadow-xl border border-white/40 space-y-4">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant">Total Payable</p>
+<h2 class="text-3xl font-manrope font-black text-on-surface">$108.90</h2>
+</div>
+<div class="text-right">
+<p class="text-xs text-secondary font-bold">Tax Included</p>
+<p class="text-[10px] text-on-surface-variant">8 Items in Basket</p>
+</div>
+</div>
+<button class="w-full h-14 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-xl font-bold text-lg flex items-center justify-center gap-3 shadow-lg shadow-primary/30 active:scale-[0.98] transition-all">
+        Complete Sale
+        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Bottom Navigation Bar (COMPONENTS_2) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-white dark:bg-slate-950 tonal-shift shadow-[0_-4px_20px_rgba(0,0,0,0.05)] rounded-t-2xl">
+<a class="flex-col items-center justify-center bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-xl px-4 py-1 active:scale-95 transition-transform tap-highlight-transparent" href="pos_billing_terminal.html">
+<span class="material-symbols-outlined" data-icon="shopping_cart" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+<span class="font-inter text-[10px] uppercase tracking-wider mt-1">POS</span>
+</a>
+<a class="flex-col items-center justify-center text-slate-400 dark:text-slate-500 active:scale-95 transition-transform tap-highlight-transparent" href="inventory_management.html">
+<span class="material-symbols-outlined" data-icon="inventory">inventory</span>
+<span class="font-inter text-[10px] uppercase tracking-wider mt-1">Inventory</span>
+</a>
+<a class="flex-col items-center justify-center text-slate-400 dark:text-slate-500 active:scale-95 transition-transform tap-highlight-transparent" href="customer_list.html">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-inter text-[10px] uppercase tracking-wider mt-1">Customers</span>
+</a>
+<a class="flex-col items-center justify-center text-slate-400 dark:text-slate-500 active:scale-95 transition-transform tap-highlight-transparent" href="pos_billing_terminal.html">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+<span class="font-inter text-[10px] uppercase tracking-wider mt-1">More</span>
+</a>
+</nav>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const openBtn = document.getElementById('mobile-menu-open');
+        const closeBtn = document.getElementById('mobile-sidebar-close');
+        const toggleSidebar = () => {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        };
+        if (openBtn) openBtn.addEventListener('click', toggleSidebar);
+        if (closeBtn) closeBtn.addEventListener('click', toggleSidebar);
+        if (overlay) overlay.addEventListener('click', toggleSidebar);
+    });
+</script>
+</body></html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Precision Rx - Inventory Management</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+   tailwind.config = {
+    darkMode: "class",
+    theme: {
+     extend: {
+      colors: {
+       "inverse-surface": "#2d3133",
+       "tertiary": "#943700",
+       "inverse-on-surface": "#eff1f3",
+       "background": "#f7f9fb",
+       "secondary-container": "#6cf8bb",
+       "outline": "#737686",
+       "on-primary": "#ffffff",
+       "on-primary-fixed": "#00174b",
+       "on-primary-fixed-variant": "#003ea8",
+       "on-background": "#191c1e",
+       "surface-bright": "#f7f9fb",
+       "secondary-fixed-dim": "#4edea3",
+       "on-primary-container": "#eeefff",
+       "surface-variant": "#e0e3e5",
+       "on-error-container": "#93000a",
+       "outline-variant": "#c3c6d7",
+       "on-tertiary-fixed": "#360f00",
+       "surface-container-lowest": "#ffffff",
+       "tertiary-fixed-dim": "#ffb596",
+       "on-tertiary": "#ffffff",
+       "secondary": "#006c49",
+       "primary-fixed": "#dbe1ff",
+       "on-error": "#ffffff",
+       "on-surface-variant": "#434655",
+       "surface-dim": "#d8dadc",
+       "on-tertiary-fixed-variant": "#7d2d00",
+       "inverse-primary": "#b4c5ff",
+       "error-container": "#ffdad6",
+       "surface-container-highest": "#e0e3e5",
+       "on-tertiary-container": "#ffede6",
+       "on-secondary-fixed-variant": "#005236",
+       "on-secondary": "#ffffff",
+       "error": "#ba1a1a",
+       "secondary-fixed": "#6ffbbe",
+       "tertiary-fixed": "#ffdbcd",
+       "primary-fixed-dim": "#b4c5ff",
+       "surface-container-low": "#f2f4f6",
+       "tertiary-container": "#bc4800",
+       "on-secondary-container": "#00714d",
+       "primary-container": "#2563eb",
+       "on-secondary-fixed": "#002113",
+       "surface-tint": "#0053db",
+       "surface-container-high": "#e6e8ea",
+       "surface": "#f7f9fb",
+       "on-surface": "#191c1e",
+       "surface-container": "#eceef0",
+       "primary": "#004ac6"
+      },
+      fontFamily: {
+       "headline": ["Manrope"],
+       "body": ["Inter"],
+       "label": ["Inter"]
+      },
+      borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+     },
+    },
+   }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+    }
+  </style>
+</head>
+<body class="flex bg-background font-body text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed flex">
+<div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden transition-opacity backdrop-blur-sm"></div>
+<aside id="sidebar" class="fixed lg:sticky left-0 top-0 h-screen w-64 bg-slate-100 dark:bg-slate-900 border-none z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col">
+<div class="p-6 flex items-center justify-between">
+<div>
+<h1 class="text-xl font-black text-blue-700 dark:text-blue-500 tracking-tight font-headline">Precision Rx</h1>
+<p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold mt-1">Lead Pharmacist</p>
+</div>
+<button id="mobile-sidebar-close" class="lg:hidden p-2 text-slate-500 hover:text-blue-600 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<!-- Dashboard -->
+<a id="nav-dashboard" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="dashboard_overview.html">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+<span class="font-inter text-sm font-medium">Dashboard</span>
+</a>
+<!-- POS -->
+<a id="nav-pos" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="pos_billing_terminal.html">
+<span class="material-symbols-outlined mr-3" data-icon="point_of_sale">point_of_sale</span>
+<span class="font-inter text-sm font-medium">POS</span>
+</a>
+<!-- Inventory -->
+<a id="nav-inventory" class="flex items-center px-4 py-3 text-blue-700 dark:text-blue-400 font-bold border-r-4 border-blue-600 bg-blue-50/50 dark:bg-blue-900/20 translate-x-1 transition-transform rounded-l-xl" href="inventory_management.html">
+<span class="material-symbols-outlined mr-3" data-icon="inventory_2" style="font-variation-settings: \'FILL\' 1;">inventory_2</span>
+<span class="font-inter text-sm font-medium">Inventory</span>
+</a>
+<!-- Customers -->
+<a id="nav-customers" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="customer_list.html">
+<span class="material-symbols-outlined mr-3" data-icon="group">group</span>
+<span class="font-inter text-sm font-medium">Customers</span>
+</a>
+<!-- Reports -->
+<a id="nav-reports" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="refined_invoice_templates.html">
+<span class="material-symbols-outlined mr-3" data-icon="assessment">assessment</span>
+<span class="font-inter text-sm font-medium">Reports</span>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<div class="flex items-center p-3 rounded-xl bg-white/50 dark:bg-slate-800/50">
+<img class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5AId7SvtNsigOTVepQ0GLyv16GHLBa0N1BiVn6q8PK6ImiPcOYuK90ZYZc707Tl-J9st8uo1JuV_G8WShO7qzOTQZ2QVQfuufsSV1MoQS-h2PkcHcXZqXjXlOyQmZUaubuTr4JbAWovgNUgeYSMn073MJJ3KjMds5xSTwGepjblmIhgXuVSLKsPH2KouQcFSfmemy0I14Js8NXVNZkywKsTU1qsuoV_ugKysChJsECd5i7-cA3CyTrOApQt-1x6vNyjIx2vz684c"/>
+<div class="ml-3 overflow-hidden">
+<p class="text-xs font-bold text-slate-900 dark:text-white truncate">Pharmacist Profile</p>
+<p class="text-[10px] text-slate-500 truncate">Lead Administrator</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Mobile Overlay -->
+<!-- SideNavBar -->
+<!-- Main Content Canvas -->
+<div class="flex-1 flex flex-col min-w-0">
+<header class="flex items-center justify-between px-6 w-full h-16 sticky top-0 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50">
+<div class="flex items-center gap-4 flex-1">
+<button id="mobile-menu-open" class="lg:hidden p-2 -ml-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative w-full max-w-xl group hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="Search medications, batch no, or category..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+</button>
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<div class="h-6 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2"></div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="shopping_cart">shopping_cart</span>
+Complete Sale
+</button>
+</div>
+</header>
+<main class="flex-1 min-w-0 pt-4 pb-20 lg:pb-8 min-h-screen overflow-y-auto">
+<div class="px-6 space-y-8">
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline text-3xl font-bold tracking-tight text-on-background">Inventory Management</h2>
+<p class="text-on-surface-variant text-sm mt-1">Real-time oversight of pharmaceutical stock and regulatory compliance.</p>
+</div>
+<div class="flex items-center gap-3">
+<a href="inventory_management.html" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-on-surface bg-surface-container hover:bg-surface-container-high transition-colors text-sm font-medium">
+<span class="material-symbols-outlined text-[20px]" data-icon="download">download</span>
+            Export CSV
+</a>
+<a href="add_new_medicine.html" class="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-primary text-on-primary hover:opacity-90 transition-all shadow-xl shadow-primary/20 text-sm font-bold">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+            Add New Medicine
+</a>
+</div>
+</div>
+<!-- Bento Filter Section -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-low p-4 rounded-2xl">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-2">Company</label>
+<select class="w-full bg-white dark:bg-slate-900 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20">
+<option>All Manufacturers</option>
+<option>Pfizer</option>
+<option>GlaxoSmithKline</option>
+<option>Novartis</option>
+</select>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-2">Category</label>
+<select class="w-full bg-white dark:bg-slate-900 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20">
+<option>All Types</option>
+<option>Tablet</option>
+<option>Syrup</option>
+<option>Injection</option>
+<option>Topical</option>
+</select>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-2">Expiry Status</label>
+<select class="w-full bg-white dark:bg-slate-900 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20">
+<option>Any Status</option>
+<option>Expiring within 30 days</option>
+<option>Expiring within 90 days</option>
+<option>Expired</option>
+</select>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-2">Stock Level</label>
+<div class="flex gap-2">
+<button class="flex-1 bg-white dark:bg-slate-900 py-2 rounded-lg text-xs font-semibold text-primary border border-primary/20">All</button>
+<button class="flex-1 bg-white/50 py-2 rounded-lg text-xs font-semibold text-on-surface-variant hover:bg-white transition-colors">Low</button>
+<button class="flex-1 bg-white/50 py-2 rounded-lg text-xs font-semibold text-on-surface-variant hover:bg-white transition-colors">Out</button>
+</div>
+</div>
+</div>
+<!-- Inventory Table Shell -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm border border-outline-variant/15">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-4 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">Name &amp; Dosage</th>
+<th class="px-6 py-4 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">Manufacturer</th>
+<th class="px-6 py-4 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">Batch No</th>
+<th class="px-6 py-4 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">Expiry</th>
+<th class="px-6 py-4 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Purchase/Sale</th>
+<th class="px-6 py-4 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Stock</th>
+<th class="px-6 py-4 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Low Stock Item -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-on-surface">Amoxicillin 500mg</span>
+<span class="text-[11px] text-on-surface-variant">Capsule • Antibiotic</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Pfizer Ltd.</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface-variant">BCH-992-01</td>
+<td class="px-6 py-4">
+<span class="text-sm text-on-surface">Oct 24, 2025</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="text-xs text-on-surface-variant line-through">$8.50</div>
+<div class="text-sm font-bold text-on-surface">$12.00</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant text-xs font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    12 Units
+                  </div>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</td>
+</tr>
+<!-- Expiry Alert Item -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-on-surface">Paracetamol 120mg/5ml</span>
+<span class="text-[11px] text-on-surface-variant">Syrup • Antipyretic</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">GlaxoSmithKline</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface-variant">GSK-881-SY</td>
+<td class="px-6 py-4">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-error-container text-on-error-container text-xs font-bold">
+<span class="material-symbols-outlined text-[14px]" data-icon="warning">warning</span>
+                    Jul 15, 2024
+                  </div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="text-xs text-on-surface-variant line-through">$4.20</div>
+<div class="text-sm font-bold text-on-surface">$6.50</div>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-sm font-bold text-on-surface">148 Units</span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</td>
+</tr>
+<!-- Healthy Stock Item -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-on-surface">Metformin 850mg</span>
+<span class="text-[11px] text-on-surface-variant">Tablet • Antidiabetic</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Novartis</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface-variant">NVT-440-DF</td>
+<td class="px-6 py-4 text-sm text-on-surface">Dec 12, 2026</td>
+<td class="px-6 py-4 text-right">
+<div class="text-xs text-on-surface-variant line-through">$15.00</div>
+<div class="text-sm font-bold text-on-surface">$22.40</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    850 Units
+                  </div>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</td>
+</tr>
+<!-- Repeat healthy items for density -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-on-surface">Lisinopril 10mg</span>
+<span class="text-[11px] text-on-surface-variant">Tablet • Antihypertensive</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Lupin Pharm</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface-variant">LP-202-HT</td>
+<td class="px-6 py-4 text-sm text-on-surface">Aug 05, 2025</td>
+<td class="px-6 py-4 text-right">
+<div class="text-xs text-on-surface-variant line-through">$12.00</div>
+<div class="text-sm font-bold text-on-surface">$18.90</div>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-sm font-bold text-on-surface">420 Units</span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination / Status Footer -->
+<div class="p-4 border-t border-outline-variant/10 flex items-center justify-between">
+<p class="text-xs text-on-surface-variant font-medium">Showing <span class="text-on-surface font-bold">1-25</span> of <span class="text-on-surface font-bold">1,240</span> pharmaceuticals</p>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-surface hover:bg-surface-container-high transition-colors text-on-surface-variant disabled:opacity-50">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-3 py-1 rounded-lg bg-primary text-on-primary text-sm font-bold">1</button>
+<button class="px-3 py-1 rounded-lg hover:bg-surface-container text-sm font-medium">2</button>
+<button class="px-3 py-1 rounded-lg hover:bg-surface-container text-sm font-medium">3</button>
+<button class="p-2 rounded-lg bg-surface hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Insights Removed for clean view -->
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Execution from JSON) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-white dark:bg-slate-950 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] rounded-t-2xl border-t border-slate-100 dark:border-slate-800">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 tap-highlight-transparent active:scale-95 transition-transform" href="dashboard_overview.html">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-inter text-[10px] uppercase tracking-wider mt-1">POS</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-xl px-4 py-1 tap-highlight-transparent active:scale-95 transition-transform" href="inventory_management.html">
+<span class="material-symbols-outlined" data-icon="inventory" style="font-variation-settings: 'FILL' 1;">inventory</span>
+<span class="font-inter text-[10px] uppercase tracking-wider mt-1">Inventory</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 tap-highlight-transparent active:scale-95 transition-transform" href="pos_billing_terminal.html">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-inter text-[10px] uppercase tracking-wider mt-1">Customers</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 tap-highlight-transparent active:scale-95 transition-transform" href="pos_billing_terminal.html">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+<span class="font-inter text-[10px] uppercase tracking-wider mt-1">More</span>
+</a>
+</nav>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const openBtn = document.getElementById('mobile-menu-open');
+        const closeBtn = document.getElementById('mobile-sidebar-close');
+        const toggleSidebar = () => {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        };
+        if (openBtn) openBtn.addEventListener('click', toggleSidebar);
+        if (closeBtn) closeBtn.addEventListener('click', toggleSidebar);
+        if (overlay) overlay.addEventListener('click', toggleSidebar);
+    });
+</script>
+</body></html>

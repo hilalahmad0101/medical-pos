@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Precision Rx | Pharmacist Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-surface": "#2d3133",
+            "tertiary": "#943700",
+            "inverse-on-surface": "#eff1f3",
+            "background": "#f7f9fb",
+            "secondary-container": "#6cf8bb",
+            "outline": "#737686",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#00174b",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-background": "#191c1e",
+            "surface-bright": "#f7f9fb",
+            "secondary-fixed-dim": "#4edea3",
+            "on-primary-container": "#eeefff",
+            "surface-variant": "#e0e3e5",
+            "on-error-container": "#93000a",
+            "outline-variant": "#c3c6d7",
+            "on-tertiary-fixed": "#360f00",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed-dim": "#ffb596",
+            "on-tertiary": "#ffffff",
+            "secondary": "#006c49",
+            "primary-fixed": "#dbe1ff",
+            "on-error": "#ffffff",
+            "on-surface-variant": "#434655",
+            "surface-dim": "#d8dadc",
+            "on-tertiary-fixed-variant": "#7d2d00",
+            "inverse-primary": "#b4c5ff",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#e0e3e5",
+            "on-tertiary-container": "#ffede6",
+            "on-secondary-fixed-variant": "#005236",
+            "on-secondary": "#ffffff",
+            "error": "#ba1a1a",
+            "secondary-fixed": "#6ffbbe",
+            "tertiary-fixed": "#ffdbcd",
+            "primary-fixed-dim": "#b4c5ff",
+            "surface-container-low": "#f2f4f6",
+            "tertiary-container": "#bc4800",
+            "on-secondary-container": "#00714d",
+            "primary-container": "#2563eb",
+            "on-secondary-fixed": "#002113",
+            "surface-tint": "#0053db",
+            "surface-container-high": "#e6e8ea",
+            "surface": "#f7f9fb",
+            "on-surface": "#191c1e",
+            "surface-container": "#eceef0",
+            "primary": "#004ac6"
+          },
+          fontFamily: {
+            "headline": ["Manrope"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+    }
+  </style>
+</head>
+<body class="flex bg-background text-on-background selection:bg-primary-fixed">
+<div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden transition-opacity backdrop-blur-sm"></div>
+<aside id="sidebar" class="fixed lg:sticky left-0 top-0 h-screen w-64 bg-slate-100 dark:bg-slate-900 border-none z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col">
+<div class="p-6 flex items-center justify-between">
+<div>
+<h1 class="text-xl font-black text-blue-700 dark:text-blue-500 tracking-tight font-headline">Precision Rx</h1>
+<p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold mt-1">Lead Pharmacist</p>
+</div>
+<button id="mobile-sidebar-close" class="lg:hidden p-2 text-slate-500 hover:text-blue-600 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<!-- Dashboard -->
+<a id="nav-dashboard" class="flex items-center px-4 py-3 text-blue-700 dark:text-blue-400 font-bold border-r-4 border-blue-600 bg-blue-50/50 dark:bg-blue-900/20 translate-x-1 transition-transform rounded-l-xl" href="dashboard_overview.html">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard" style="font-variation-settings: \'FILL\' 1;">dashboard</span>
+<span class="font-inter text-sm font-medium">Dashboard</span>
+</a>
+<!-- POS -->
+<a id="nav-pos" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="pos_billing_terminal.html">
+<span class="material-symbols-outlined mr-3" data-icon="point_of_sale">point_of_sale</span>
+<span class="font-inter text-sm font-medium">POS</span>
+</a>
+<!-- Inventory -->
+<a id="nav-inventory" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="inventory_management.html">
+<span class="material-symbols-outlined mr-3" data-icon="inventory_2">inventory_2</span>
+<span class="font-inter text-sm font-medium">Inventory</span>
+</a>
+<!-- Customers -->
+<a id="nav-customers" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="customer_list.html">
+<span class="material-symbols-outlined mr-3" data-icon="group">group</span>
+<span class="font-inter text-sm font-medium">Customers</span>
+</a>
+<!-- Reports -->
+<a id="nav-reports" class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-xl group" href="refined_invoice_templates.html">
+<span class="material-symbols-outlined mr-3" data-icon="assessment">assessment</span>
+<span class="font-inter text-sm font-medium">Reports</span>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<div class="flex items-center p-3 rounded-xl bg-white/50 dark:bg-slate-800/50">
+<img class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5AId7SvtNsigOTVepQ0GLyv16GHLBa0N1BiVn6q8PK6ImiPcOYuK90ZYZc707Tl-J9st8uo1JuV_G8WShO7qzOTQZ2QVQfuufsSV1MoQS-h2PkcHcXZqXjXlOyQmZUaubuTr4JbAWovgNUgeYSMn073MJJ3KjMds5xSTwGepjblmIhgXuVSLKsPH2KouQcFSfmemy0I14Js8NXVNZkywKsTU1qsuoV_ugKysChJsECd5i7-cA3CyTrOApQt-1x6vNyjIx2vz684c"/>
+<div class="ml-3 overflow-hidden">
+<p class="text-xs font-bold text-slate-900 dark:text-white truncate">Pharmacist Profile</p>
+<p class="text-[10px] text-slate-500 truncate">Lead Administrator</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- SideNavBar -->
+<!-- Main Canvas -->
+<div class="flex-1 flex flex-col min-w-0">
+<header class="flex items-center justify-between px-6 w-full h-16 sticky top-0 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50">
+<div class="flex items-center gap-4 flex-1">
+<button id="mobile-menu-open" class="lg:hidden p-2 -ml-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative w-full max-w-xl group hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="Search medications, batch no, or category..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+</button>
+<button class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<div class="h-6 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2"></div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="shopping_cart">shopping_cart</span>
+Complete Sale
+</button>
+</div>
+</header>
+<main class="flex-1 min-w-0 pt-4 pb-20 lg:pb-8 min-h-screen overflow-y-auto">
+<div class="max-w-7xl mx-auto px-6">
+<!-- Page Header -->
+<div class="mb-8 flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-3xl font-extrabold text-on-background tracking-tight font-headline">Clinical Overview</h1>
+<p class="text-on-surface-variant font-body">Welcome back, Dr. Vance. Here is what's happening today.</p>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low px-4 py-2 rounded-lg text-sm text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span>October 24, 2023</span>
+</div>
+</div>
+<!-- Summary Cards Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+<!-- Total Sales -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border-none shadow-sm flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary-fixed rounded-lg text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-secondary font-bold text-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +12%
+            </span>
+</div>
+<div>
+<p class="text-on-surface-variant text-xs font-label uppercase tracking-widest mb-1">Total Sales (Today)</p>
+<h3 class="text-2xl font-black text-on-background font-headline">$14,280.50</h3>
+</div>
+</div>
+<!-- Profit Overview -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border-none shadow-sm flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary-container rounded-lg text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<span class="text-secondary font-bold text-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +5.2%
+            </span>
+</div>
+<div>
+<p class="text-on-surface-variant text-xs font-label uppercase tracking-widest mb-1">Profit Overview</p>
+<h3 class="text-2xl font-black text-on-background font-headline">$4,120.00</h3>
+</div>
+</div>
+<!-- Low Stock Alerts -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border-none shadow-sm flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-tertiary-fixed rounded-lg text-tertiary">
+<span class="material-symbols-outlined">inventory</span>
+</div>
+<span class="bg-tertiary-container text-on-tertiary-container px-2 py-0.5 rounded-full text-[10px] font-bold">IMPORTANT</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-xs font-label uppercase tracking-widest mb-1">Low Stock Alerts</p>
+<h3 class="text-2xl font-black text-on-background font-headline">12 Items</h3>
+</div>
+</div>
+<!-- Expiry Alerts -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border-none shadow-sm border-l-4 border-error flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-error-container rounded-lg text-error">
+<span class="material-symbols-outlined">event_busy</span>
+</div>
+<span class="bg-error text-on-error px-2 py-0.5 rounded-full text-[10px] font-bold">CRITICAL</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-xs font-label uppercase tracking-widest mb-1">Expiry Alerts</p>
+<h3 class="text-2xl font-black text-on-background font-headline">08 Items</h3>
+</div>
+</div>
+</div>
+<!-- Charts & Quick Actions -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8 mb-8">
+<!-- Monthly Sales Revenue (Line) -->
+<div class="xl:col-span-8 bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="text-lg font-bold text-on-background font-headline">Monthly Sales Revenue</h2>
+<p class="text-xs text-on-surface-variant">Performance comparison (Current vs Previous Month)</p>
+</div>
+<select class="bg-surface-container-low border-none rounded-lg text-xs font-medium focus:ring-primary">
+<option>Last 6 Months</option>
+<option>Last Year</option>
+</select>
+</div>
+<!-- Placeholder for Chart -->
+<div class="h-64 flex items-end justify-between gap-2 px-2">
+<div class="w-full bg-surface-container h-[40%] rounded-t-lg transition-all hover:bg-primary/20 relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-inverse-surface text-inverse-on-surface px-2 py-1 rounded text-[10px]">$12k</div>
+</div>
+<div class="w-full bg-surface-container h-[55%] rounded-t-lg transition-all hover:bg-primary/20 relative group"></div>
+<div class="w-full bg-surface-container h-[45%] rounded-t-lg transition-all hover:bg-primary/20 relative group"></div>
+<div class="w-full bg-primary/40 h-[70%] rounded-t-lg transition-all hover:bg-primary relative group"></div>
+<div class="w-full bg-primary/40 h-[85%] rounded-t-lg transition-all hover:bg-primary relative group"></div>
+<div class="w-full bg-primary h-[60%] rounded-t-lg relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-2 py-1 rounded text-[10px] font-bold">Current</div>
+</div>
+</div>
+<div class="flex justify-between mt-4 px-2">
+<span class="text-[10px] text-on-surface-variant font-bold">MAY</span>
+<span class="text-[10px] text-on-surface-variant font-bold">JUN</span>
+<span class="text-[10px] text-on-surface-variant font-bold">JUL</span>
+<span class="text-[10px] text-on-surface-variant font-bold">AUG</span>
+<span class="text-[10px] text-on-surface-variant font-bold">SEP</span>
+<span class="text-[10px] text-on-surface-variant font-bold text-primary">OCT</span>
+</div>
+</div>
+<!-- Quick Actions & Top Medicines -->
+<div class="xl:col-span-4 flex-col gap-8">
+<!-- Quick Actions -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<h2 class="text-sm font-bold text-on-background font-headline mb-4">Quick Actions</h2>
+<div class="space-y-3">
+<button class="w-full flex items-center justify-between p-4 rounded-xl bg-surface-container-low hover:bg-primary-fixed transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">add_shopping_cart</span>
+<span class="text-sm font-semibold text-on-surface">New Sale</span>
+</div>
+<span class="material-symbols-outlined text-outline text-sm">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 rounded-xl bg-surface-container-low hover:bg-secondary-container transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform">medication</span>
+<span class="text-sm font-semibold text-on-surface">Add Medicine</span>
+</div>
+<span class="material-symbols-outlined text-outline text-sm">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-highest transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary group-hover:scale-110 transition-transform">description</span>
+<span class="text-sm font-semibold text-on-surface">Generate Report</span>
+</div>
+<span class="material-symbols-outlined text-outline text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Top Selling Medicines (Bar) -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex-1">
+<h2 class="text-sm font-bold text-on-background font-headline mb-4">Top Selling Medicines</h2>
+<div class="space-y-4">
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-on-surface">Paracetamol 500mg</span>
+<span class="text-outline">452 Sales</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 85%;"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-on-surface">Amoxicillin 250mg</span>
+<span class="text-outline">312 Sales</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 65%;"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-on-surface">Metformin 850mg</span>
+<span class="text-outline">288 Sales</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 58%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Invoices Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-surface-container flex-col md:flex-row md:items-center justify-between gap-4">
+<h2 class="text-lg font-bold text-on-background font-headline">Recent Invoices</h2>
+<div class="flex items-center gap-2">
+<button class="text-primary text-xs font-bold hover:underline">View All Invoices</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Invoice ID</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Customer</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Date</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Total</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Status</th>
+<th class="px-6 py-4"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 text-sm font-bold text-primary">#PRX-9210</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-[10px] font-bold">JS</div>
+<span class="text-sm font-medium text-on-surface">Johnathan Smith</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Oct 24, 2023 • 10:45 AM</td>
+<td class="px-6 py-4 text-sm font-bold text-on-background">$142.50</td>
+<td class="px-6 py-4">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold">PAID</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">print</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 text-sm font-bold text-primary">#PRX-9209</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-[10px] font-bold">EW</div>
+<span class="text-sm font-medium text-on-surface">Elena Wright</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Oct 24, 2023 • 09:12 AM</td>
+<td class="px-6 py-4 text-sm font-bold text-on-background">$85.20</td>
+<td class="px-6 py-4">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold">PAID</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">print</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 text-sm font-bold text-primary">#PRX-9208</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-[10px] font-bold">MK</div>
+<span class="text-sm font-medium text-on-surface">Marcus Kane</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Oct 23, 2023 • 05:30 PM</td>
+<td class="px-6 py-4 text-sm font-bold text-on-background">$210.00</td>
+<td class="px-6 py-4">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-[10px] font-bold">PENDING</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">print</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Shared Component - Mobile only) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.05)] border-t border-slate-100">
+<a class="flex-col items-center justify-center text-slate-400 active:scale-95 transition-transform" href="dashboard_overview.html">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-inter text-[10px] uppercase tracking-wider mt-1">POS</span>
+</a>
+<a class="flex-col items-center justify-center text-slate-400 active:scale-95 transition-transform" href="inventory_management.html">
+<span class="material-symbols-outlined">inventory</span>
+<span class="font-inter text-[10px] uppercase tracking-wider mt-1">Inventory</span>
+</a>
+<a class="flex-col items-center justify-center bg-blue-100 text-blue-700 rounded-xl px-4 py-1 active:scale-95 transition-transform" href="pos_billing_terminal.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-inter text-[10px] uppercase tracking-wider mt-1">Dashboard</span>
+</a>
+<a class="flex-col items-center justify-center text-slate-400 active:scale-95 transition-transform" href="pos_billing_terminal.html">
+<span class="material-symbols-outlined">person</span>
+<span class="font-inter text-[10px] uppercase tracking-wider mt-1">Customers</span>
+</a>
+<a class="flex-col items-center justify-center text-slate-400 active:scale-95 transition-transform" href="pos_billing_terminal.html">
+<span class="material-symbols-outlined">menu</span>
+<span class="font-inter text-[10px] uppercase tracking-wider mt-1">More</span>
+</a>
+</nav>
+<!-- Contextual FAB (Dashboard only) -->
+<button class="fixed bottom-24 lg:bottom-12 right-6 lg:right-12 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform active:scale-90 z-40">
+<span class="material-symbols-outlined text-3xl">add_shopping_cart</span>
+</button>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const openBtn = document.getElementById('mobile-menu-open');
+        const closeBtn = document.getElementById('mobile-sidebar-close');
+        const toggleSidebar = () => {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        };
+        if (openBtn) openBtn.addEventListener('click', toggleSidebar);
+        if (closeBtn) closeBtn.addEventListener('click', toggleSidebar);
+        if (overlay) overlay.addEventListener('click', toggleSidebar);
+    });
+</script>
+</body></html>
